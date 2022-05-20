@@ -55,19 +55,19 @@ public class Main {
 		return tasksPerDepth;
 	}
 	
-	private static void setDepth(DiGraph employees, int root, int[] employeesPerDepth, int[] employeeDepth, int currentDepth) {
-		if (currentDepth <= employeeDepth[root]) {
+	private static void setDepth(DiGraph tasks, int root, int[] tasksPerDepth, int[] taskDepth, int currentDepth) {
+		if (currentDepth <= taskDepth[root]) {
 			return;
 		}
-		if (employeeDepth[root] > 0) {
-			employeesPerDepth[employeeDepth[root]]--;
+		if (taskDepth[root] > 0) {
+			tasksPerDepth[taskDepth[root]]--;
 		}
 		
-		employeeDepth[root] = currentDepth;
-		employeesPerDepth[currentDepth]++;
+		taskDepth[root] = currentDepth;
+		tasksPerDepth[currentDepth]++;
 		
-		for (int successor : employees.outAdjacentNodes(root)) {
-			setDepth(employees, successor, employeesPerDepth, employeeDepth, currentDepth + 1);
+		for (int successor : tasks.outAdjacentNodes(root)) {
+			setDepth(tasks, successor, tasksPerDepth, taskDepth, currentDepth + 1);
 		}
 	}
 	
